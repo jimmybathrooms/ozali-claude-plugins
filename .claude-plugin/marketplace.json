@@ -1,0 +1,9 @@
+{
+  "name": "jimmybathrooms-plugins",
+  "owner": { "name": "jimmybathrooms" },
+  "description": "Plugins para Claude Code: uso de la ventana de 5h, contexto, tokens y costo en la status line",
+  "plugins": [
+    { "name": "usage-meter", "source": "./plugins/usage-meter" },
+    { "name": "token-cost", "source": "./plugins/token-cost" }
+  ]
+}
