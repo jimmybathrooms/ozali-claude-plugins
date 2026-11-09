@@ -10,14 +10,10 @@ const costUsd = atom({ plugin: 'token-cost', key: 'costUsd' } as const, 0)
 const k = (n: number) =>
   n >= 1_000_000 ? `${(n / 1_000_000).toFixed(2)}M` : n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n)
 
-const line = (t: Totals, usd: number) =>
-  `in: ${k(t.input + t.cacheRead + t.cacheWrite)} · out: ${k(t.output)} · ~$${usd.toFixed(2)}`
-
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     const u = await $.session.usage()
     if (u.cost) await update($, costUsd, () => u.cost!.usd)
-    $.ui.status(line(await read($, totals), await read($, costUsd)))
     return next(e)
   })
 
@@ -32,14 +28,26 @@ export const register: Register = on => {
         cacheWrite: t.cacheWrite + u.cache_creation_input_tokens,
       }))
     }
-    $.ui.status(line(await read($, totals), await read($, costUsd)))
     return next(e)
   })
 
   // El costo lo lleva el motor (/cost); aquí solo se lee.
   on('session.measure', async ($, e, next) => {
     if (e.cost) await update($, costUsd, () => e.cost!.usd)
-    $.ui.status(line(await read($, totals), await read($, costUsd)))
     return next(e)
+  })
+
+  on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
+    if (e.props.hasSurvey) return next(e)
+    const t = await read($, totals)
+    const usd = await read($, costUsd)
+    const { Box, Text } = $.ui.resolve(e)
+    return (
+      <Box>
+        <Text dimColor>
+          token-cost: in: {k(t.input + t.cacheRead + t.cacheWrite)} · out: {k(t.output)} · ~${usd.toFixed(2)}
+        </Text>
+      </Box>
+    )
   })
 }

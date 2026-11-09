@@ -1,6 +1,6 @@
-# claude-plugins
+# ozali-claude-plugins
 
-Plugins ("mods") para Claude Code que muestran datos de uso en la status line.
+Plugins ("mods") para Claude Code que muestran datos de uso en una banda sobre el prompt.
 
 | Plugin | Qué muestra |
 | --- | --- |
@@ -12,8 +12,8 @@ Plugins ("mods") para Claude Code que muestran datos de uso en la status line.
 En una sesión de Claude Code (terminal):
 
 ```
-/plugin install usage-meter --marketplace jimmybathrooms/claude-plugins
-/plugin install token-cost --marketplace jimmybathrooms/claude-plugins
+/plugin install usage-meter --marketplace jimmybathrooms/ozali-claude-plugins
+/plugin install token-cost --marketplace jimmybathrooms/ozali-claude-plugins
 ```
 
 Responde `y` para agregar el marketplace y elige el alcance.
@@ -21,8 +21,8 @@ Responde `y` para agregar el marketplace y elige el alcance.
 Desde un shell:
 
 ```
-claude plugin install usage-meter --marketplace jimmybathrooms/claude-plugins
-claude plugin install token-cost --marketplace jimmybathrooms/claude-plugins
+claude plugin install usage-meter --marketplace jimmybathrooms/ozali-claude-plugins
+claude plugin install token-cost --marketplace jimmybathrooms/ozali-claude-plugins
 ```
 
 ## Notas

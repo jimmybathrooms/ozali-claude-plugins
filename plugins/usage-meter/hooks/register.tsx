@@ -1,6 +1,9 @@
+import { atom, read, update } from 'claude-code'
 import type { Register } from 'claude-code'
 
 type Limit = { kind: string; percentUsed: number; resetsAt?: string }
+
+const lineAtom = atom({ plugin: 'usage-meter', key: 'line' } as const, '')
 
 const fmt = (n: number) => `${Math.round(n)}%`
 
@@ -12,22 +15,33 @@ const resetIn = (iso?: string) => {
 
 const line = (context: { percent?: number }, limits: Limit[]) => {
   const five = limits.find(l => l.kind === 'five_hour')
-  const parts = [
+  return [
     five ? `5h: ${fmt(five.percentUsed)}${resetIn(five.resetsAt)}` : '5h: –',
     context.percent !== undefined ? `ctx: ${fmt(context.percent)}` : 'ctx: –',
-  ]
-  return parts.join(' · ')
+  ].join(' · ')
 }
 
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     const u = await $.session.usage()
-    $.ui.status(line(u.context, u.rateLimits))
+    await update($, lineAtom, () => line(u.context, u.rateLimits))
     return next(e)
   })
 
-  on('session.measure', ($, e, next) => {
-    $.ui.status(line(e.context, e.rateLimits))
+  on('session.measure', async ($, e, next) => {
+    await update($, lineAtom, () => line(e.context, e.rateLimits))
     return next(e)
+  })
+
+  on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
+    const text = await read($, lineAtom)
+    if (e.props.hasSurvey || !text) return next(e)
+
+    const { Box, Text } = $.ui.resolve(e)
+    return (
+      <Box>
+        <Text dimColor>usage-meter: {text}</Text>
+      </Box>
+    )
   })
 }

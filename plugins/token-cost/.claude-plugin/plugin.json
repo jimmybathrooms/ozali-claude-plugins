@@ -1,1 +1,1 @@
-{ "name": "token-cost", "version": "0.1.0", "icon": "./.claude-plugin/icon.png", "description": "Muestra tokens de entrada, salida y costo aproximado de la sesión en la status line", "types": "./types/index.d.ts" }
+{ "name": "token-cost", "version": "0.1.0", "icon": "./.claude-plugin/icon.png", "description": "Muestra tokens de entrada, salida y costo aproximado de la sesión en una banda sobre el prompt", "types": "./types/index.d.ts" }
