@@ -6,5 +6,24 @@
   "author": {
     "name": "jimmybathrooms"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "userConfig": {
+    "enabled": {
+      "type": "boolean",
+      "title": "Mostrar la rama de git",
+      "description": "Apaga o enciende la línea de este plugin sin desinstalarlo. Para deshabilitarlo por completo: claude plugin disable.",
+      "default": true
+    },
+    "theme": {
+      "type": "string",
+      "title": "Tema de colores",
+      "description": "light: para fondo claro. dark: para fondo oscuro. auto: sigue el tema de Claude Code.",
+      "default": "light",
+      "options": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  }
 }

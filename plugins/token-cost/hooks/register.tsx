@@ -2,6 +2,7 @@ import { atom, read, update } from 'claude-code'
 import type { Register } from 'claude-code'
 
 import type { Totals } from '../types'
+import { isOn, palette } from './palette'
 
 const zero: Totals = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 }
 const totals = atom({ plugin: 'token-cost', key: 'totals' } as const, zero)
@@ -10,7 +11,9 @@ const costUsd = atom({ plugin: 'token-cost', key: 'costUsd' } as const, 0)
 const k = (n: number) =>
   n >= 1_000_000 ? `${(n / 1_000_000).toFixed(2)}M` : n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n)
 
-export const register: Register = on => {
+export const register: Register = (on, options) => {
+  const c = palette(options.theme)
+
   on('session.start', async ($, e, next) => {
     const u = await $.session.usage()
     if (u.cost) await update($, costUsd, () => u.cost!.usd)
@@ -38,7 +41,7 @@ export const register: Register = on => {
   })
 
   on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
-    if (e.props.hasSurvey) return next(e)
+    if (!isOn(options) || e.props.hasSurvey) return next(e)
     const t = await read($, totals)
     const usd = await read($, costUsd)
     const rest = await next(e)
@@ -46,9 +49,12 @@ export const register: Register = on => {
     return (
       <Box flexDirection="column">
         <Box justifyContent="flex-end">
-          <Text dimColor>
-            ⇄ in {k(t.input + t.cacheRead + t.cacheWrite)} · out {k(t.output)} · ~${usd.toFixed(2)}
-          </Text>
+          <Box width={46}>
+            <Text color={c.tokens}>⇄ </Text>
+            <Text color={c.tokens} wrap="truncate-end">
+              in {k(t.input + t.cacheRead + t.cacheWrite)} · out {k(t.output)} · ~${usd.toFixed(2)}
+            </Text>
+          </Box>
         </Box>
         {rest}
       </Box>

@@ -1,8 +1,12 @@
 import type { Register } from 'claude-code'
 
-export const register: Register = on => {
+import { isOn, palette } from './palette'
+
+export const register: Register = (on, options) => {
+  const c = palette(options.theme)
+
   on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
-    if (e.props.hasSurvey) return next(e)
+    if (!isOn(options) || e.props.hasSurvey) return next(e)
     const cwd = await $.session.cwd()
     const r = await $.process.run(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], { cwd, timeoutMs: 2000 }).catch(() => undefined)
     const branch = r && r.exitCode === 0 ? r.stdout.trim() : ''
@@ -12,7 +16,10 @@ export const register: Register = on => {
     return (
       <Box flexDirection="column">
         <Box justifyContent="flex-end">
-          <Text color="magenta">⎇ {branch}</Text>
+          <Box width={46}>
+            <Text color={c.branch}>⎇ </Text>
+            <Text color={c.branch} wrap="truncate-end">{branch}</Text>
+          </Box>
         </Box>
         {rest}
       </Box>

@@ -1,6 +1,8 @@
 import { atom, read, update } from 'claude-code'
 import type { Register } from 'claude-code'
 
+import { isOn, palette } from './palette'
+
 type Limit = { kind: string; percentUsed: number; resetsAt?: string }
 
 const lineAtom = atom({ plugin: 'usage-meter', key: 'line' } as const, '')
@@ -21,7 +23,9 @@ const line = (context: { percent?: number }, limits: Limit[]) => {
   ].join(' · ')
 }
 
-export const register: Register = on => {
+export const register: Register = (on, options) => {
+  const c = palette(options.theme)
+
   on('session.start', async ($, e, next) => {
     const u = await $.session.usage()
     await update($, lineAtom, () => line(u.context, u.rateLimits))
@@ -35,14 +39,17 @@ export const register: Register = on => {
 
   on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
     const text = await read($, lineAtom)
-    if (e.props.hasSurvey || !text) return next(e)
+    if (!isOn(options) || e.props.hasSurvey || !text) return next(e)
 
     const rest = await next(e)
     const { Box, Text } = $.ui.resolve(e)
     return (
       <Box flexDirection="column">
         <Box justifyContent="flex-end">
-          <Text dimColor>⏲ {text}</Text>
+          <Box width={46}>
+            <Text color={c.usage}>⏲ </Text>
+            <Text color={c.usage} wrap="truncate-end">{text}</Text>
+          </Box>
         </Box>
         {rest}
       </Box>

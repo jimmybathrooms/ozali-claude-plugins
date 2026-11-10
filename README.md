@@ -41,6 +41,31 @@ claude plugin install path-indicator --marketplace jimmybathrooms/ozali-claude-p
 claude plugin install git-branch --marketplace jimmybathrooms/ozali-claude-plugins
 ```
 
+## Personalización
+
+Cada plugin (menos `ozali-suite`) tiene dos opciones, en `/config` (filas `<plugin>.enabled` y `<plugin>.theme`) o en `settings.json` bajo `pluginConfigs`:
+
+| Opción | Valores | Para qué |
+| --- | --- | --- |
+| `enabled` | `true` (por defecto) / `false` | Oculta o muestra la línea de ese plugin sin desinstalarlo |
+| `theme` | `light` (por defecto) / `dark` / `auto` | Paleta de colores. `light` para fondo claro, `dark` para fondo oscuro, `auto` sigue el tema de Claude Code |
+
+Paleta (cada línea, ícono y texto, usa el color de su plugin):
+
+| Elemento | `light` | `dark` |
+| --- | --- | --- |
+| `⏲` usage-meter | `#B45309` | `#FBBF24` |
+| `⇄` token-cost | `#0F766E` | `#5EEAD4` |
+| `⌂` path-indicator | `#0369A1` | `#7DD3FC` |
+| `⎇` git-branch | `#A21CAF` | `#E879F9` |
+
+Para quitar un plugin por completo (ni siquiera carga), deshabilítalo o desinstálalo:
+
+```
+claude plugin disable git-branch@ozali-claude-plugins
+claude plugin enable git-branch@ozali-claude-plugins
+```
+
 ## Notas
 - El % de las 5 h solo aparece con una suscripción de Claude; fuera de ella muestra `–`.
 - Los tokens de `token-cost` se acumulan por turno desde que se carga el plugin.
