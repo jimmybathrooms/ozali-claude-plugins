@@ -7,7 +7,7 @@ Plugins ("mods") para Claude Code que muestran datos de uso, la carpeta y la ram
 | `usage-meter` | `⏲` % usado de la ventana de 5 h (con tiempo de reset, `↻2h11m`) y % de contexto de la sesión |
 | `token-cost` | `⇄` Tokens de entrada / salida de la sesión y costo aproximado (el mismo que `/cost`) |
 | `path-indicator` | Carpeta activa de la sesión (`⌂ ~/ruta`) |
-| `git-branch` | Rama de git activa (`⎇ main`); no muestra nada fuera de un repo |
+| `git-branch` | Rama de git activa (`⎇ main`), se actualiza sola cada ~3 s si cambias de rama por fuera; en HEAD desacoplado muestra `@sha`; no muestra nada fuera de un repo |
 | `ozali-suite` | Concentrador: instala los cuatro anteriores de una vez |
 
 ## Instalación
