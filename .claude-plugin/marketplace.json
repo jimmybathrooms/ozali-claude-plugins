@@ -1,9 +1,29 @@
 {
   "name": "ozali-claude-plugins",
-  "owner": { "name": "jimmybathrooms" },
+  "owner": {
+    "name": "jimmybathrooms"
+  },
   "description": "Plugins para Claude Code: uso de la ventana de 5h, contexto, tokens y costo en una banda sobre el prompt",
   "plugins": [
-    { "name": "usage-meter", "source": "./plugins/usage-meter" },
-    { "name": "token-cost", "source": "./plugins/token-cost" }
+    {
+      "name": "usage-meter",
+      "source": "./plugins/usage-meter"
+    },
+    {
+      "name": "token-cost",
+      "source": "./plugins/token-cost"
+    },
+    {
+      "name": "path-indicator",
+      "source": "./plugins/path-indicator"
+    },
+    {
+      "name": "git-branch",
+      "source": "./plugins/git-branch"
+    },
+    {
+      "name": "ozali-suite",
+      "source": "./plugins/ozali-suite"
+    }
   ]
 }

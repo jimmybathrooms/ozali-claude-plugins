@@ -1,0 +1,16 @@
+{
+  "name": "ozali-suite",
+  "version": "0.1.0",
+  "description": "Instala de una vez todos los plugins de ozali: usage-meter, token-cost, path-indicator y git-branch",
+  "dependencies": [
+    "usage-meter",
+    "token-cost",
+    "path-indicator",
+    "git-branch"
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "author": {
+    "name": "jimmybathrooms"
+  },
+  "license": "MIT"
+}

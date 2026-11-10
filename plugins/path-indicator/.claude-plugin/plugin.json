@@ -1,0 +1,10 @@
+{
+  "name": "path-indicator",
+  "version": "0.1.0",
+  "description": "Muestra a la izquierda, sobre el prompt, la carpeta activa de la sesión",
+  "icon": "./.claude-plugin/icon.png",
+  "author": {
+    "name": "jimmybathrooms"
+  },
+  "license": "MIT"
+}

@@ -37,10 +37,14 @@ export const register: Register = on => {
     const text = await read($, lineAtom)
     if (e.props.hasSurvey || !text) return next(e)
 
+    const rest = await next(e)
     const { Box, Text } = $.ui.resolve(e)
     return (
-      <Box>
-        <Text dimColor>usage-meter: {text}</Text>
+      <Box flexDirection="column">
+        <Box justifyContent="flex-end">
+          <Text dimColor>usage-meter: {text}</Text>
+        </Box>
+        {rest}
       </Box>
     )
   })

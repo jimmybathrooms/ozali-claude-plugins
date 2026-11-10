@@ -41,12 +41,16 @@ export const register: Register = on => {
     if (e.props.hasSurvey) return next(e)
     const t = await read($, totals)
     const usd = await read($, costUsd)
+    const rest = await next(e)
     const { Box, Text } = $.ui.resolve(e)
     return (
-      <Box>
-        <Text dimColor>
-          token-cost: in: {k(t.input + t.cacheRead + t.cacheWrite)} · out: {k(t.output)} · ~${usd.toFixed(2)}
-        </Text>
+      <Box flexDirection="column">
+        <Box justifyContent="flex-end">
+          <Text dimColor>
+            token-cost: in: {k(t.input + t.cacheRead + t.cacheWrite)} · out: {k(t.output)} · ~${usd.toFixed(2)}
+          </Text>
+        </Box>
+        {rest}
       </Box>
     )
   })

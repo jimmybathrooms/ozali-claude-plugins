@@ -1,0 +1,10 @@
+{
+  "name": "git-branch",
+  "version": "0.1.0",
+  "description": "Muestra la rama de git activa sobre el prompt",
+  "icon": "./.claude-plugin/icon.png",
+  "author": {
+    "name": "jimmybathrooms"
+  },
+  "license": "MIT"
+}
