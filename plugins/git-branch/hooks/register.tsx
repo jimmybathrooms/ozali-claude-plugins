@@ -12,7 +12,7 @@ export const register: Register = on => {
     return (
       <Box flexDirection="column">
         <Box justifyContent="flex-end">
-          <Text color="magenta">🌿 {branch}</Text>
+          <Text color="magenta">⎇ {branch}</Text>
         </Box>
         {rest}
       </Box>

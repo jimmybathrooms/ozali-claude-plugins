@@ -12,7 +12,7 @@ export const register: Register = on => {
     return (
       <Box flexDirection="column">
         <Box justifyContent="flex-end">
-          <Text color="cyan">📁 {short(cwd, '/Users/' + cwd.split('/')[2])}</Text>
+          <Text color="cyan">⌂ {short(cwd, '/Users/' + cwd.split('/')[2])}</Text>
         </Box>
         {rest}
       </Box>

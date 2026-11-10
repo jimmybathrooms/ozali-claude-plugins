@@ -1,13 +1,13 @@
 # ozali-claude-plugins
 
-Plugins ("mods") para Claude Code que muestran datos de uso, la carpeta y la rama activa en bandas sobre el prompt (cada plugin en su propia línea).
+Plugins ("mods") para Claude Code que muestran datos de uso, la carpeta y la rama activa en una banda sobre el prompt, alineada a la derecha (cada plugin en su propia línea).
 
 | Plugin | Qué muestra |
 | --- | --- |
-| `usage-meter` | % usado de la ventana de 5 h (con tiempo de reset) y % de contexto de la sesión |
-| `token-cost` | Tokens de entrada / salida de la sesión y costo aproximado (el mismo que `/cost`) |
-| `path-indicator` | Carpeta activa de la sesión (`📁 ~/ruta`), a la izquierda |
-| `git-branch` | Rama de git activa (`🌿 main`); no muestra nada fuera de un repo |
+| `usage-meter` | `⏲` % usado de la ventana de 5 h (con tiempo de reset, `↻2h11m`) y % de contexto de la sesión |
+| `token-cost` | `⇄` Tokens de entrada / salida de la sesión y costo aproximado (el mismo que `/cost`) |
+| `path-indicator` | Carpeta activa de la sesión (`⌂ ~/ruta`) |
+| `git-branch` | Rama de git activa (`⎇ main`); no muestra nada fuera de un repo |
 | `ozali-suite` | Concentrador: instala los cuatro anteriores de una vez |
 
 ## Instalación

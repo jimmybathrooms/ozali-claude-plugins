@@ -10,7 +10,7 @@ const fmt = (n: number) => `${Math.round(n)}%`
 const resetIn = (iso?: string) => {
   if (!iso) return ''
   const mins = Math.max(0, Math.round((Date.parse(iso) - Date.now()) / 60000))
-  return ` (reset ${Math.floor(mins / 60)}h${String(mins % 60).padStart(2, '0')}m)`
+  return ` ↻${Math.floor(mins / 60)}h${String(mins % 60).padStart(2, '0')}m`
 }
 
 const line = (context: { percent?: number }, limits: Limit[]) => {
@@ -42,7 +42,7 @@ export const register: Register = on => {
     return (
       <Box flexDirection="column">
         <Box justifyContent="flex-end">
-          <Text dimColor>usage-meter: {text}</Text>
+          <Text dimColor>⏲ {text}</Text>
         </Box>
         {rest}
       </Box>

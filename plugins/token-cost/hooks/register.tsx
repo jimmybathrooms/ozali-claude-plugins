@@ -47,7 +47,7 @@ export const register: Register = on => {
       <Box flexDirection="column">
         <Box justifyContent="flex-end">
           <Text dimColor>
-            token-cost: in: {k(t.input + t.cacheRead + t.cacheWrite)} · out: {k(t.output)} · ~${usd.toFixed(2)}
+            ⇄ in {k(t.input + t.cacheRead + t.cacheWrite)} · out {k(t.output)} · ~${usd.toFixed(2)}
           </Text>
         </Box>
         {rest}
